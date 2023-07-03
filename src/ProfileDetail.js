@@ -8,18 +8,18 @@ const ProfileDetail = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`https://express-t4.onrender.com/api/users/${id}`);
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
     fetchUser();
   }, [id]);
-
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get(`https://express-t4.onrender.com/api/users/${id}`);
-      setUser(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  
   if (!user) {
     return <div>Loading...</div>;
   }
